@@ -1,12 +1,12 @@
 import os
 import json
 import base64
-import io
 import re
 
 from flask import Flask, request, jsonify, send_from_directory
 from dotenv import load_dotenv
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 
 load_dotenv()
 
@@ -17,7 +17,7 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 if not GEMINI_API_KEY:
     raise RuntimeError("GEMINI_API_KEY environment variable is not set!")
 
-genai.configure(api_key=GEMINI_API_KEY)
+client = genai.Client(api_key=GEMINI_API_KEY)
 
 
 @app.route("/")
@@ -62,8 +62,10 @@ Antworte NUR mit einem validen JSON-Objekt (ohne Markdown-Codeblocks) mit genau 
 """
 
     try:
-        text_model = genai.GenerativeModel("gemini-2.0-flash")
-        text_response = text_model.generate_content(text_prompt)
+        text_response = client.models.generate_content(
+            model="gemini-2.0-flash",
+            contents=text_prompt,
+        )
         raw_text = text_response.text.strip()
 
         # Strip potential markdown code fences
@@ -86,17 +88,17 @@ background that matches the element type."""
 
     card_image_b64 = None
     try:
-        image_model = genai.GenerativeModel("gemini-2.0-flash-preview-image-generation")
-        image_response = image_model.generate_content(
-            image_prompt,
-            generation_config=genai.GenerationConfig(
-                response_modalities=["TEXT", "IMAGE"],
+        image_response = client.models.generate_content(
+            model="gemini-3-pro-image-preview",
+            contents=image_prompt,
+            config=types.GenerateContentConfig(
+                response_modalities=["IMAGE"],
             ),
         )
 
         # Extract image from response parts
         for part in image_response.candidates[0].content.parts:
-            if hasattr(part, "inline_data") and part.inline_data is not None:
+            if part.inline_data and part.inline_data.data:
                 card_image_b64 = base64.b64encode(part.inline_data.data).decode("utf-8")
                 break
     except Exception as e:
