@@ -6,14 +6,11 @@ services:
     environment:
       - GEMINI_API_KEY=${GEMINI_API_KEY}
     networks:
-      - traefik_proxy
+      - web
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.sammelkarten.rule=Host(`sammelkarten.hackerwerkstatt.de`)"
-      - "traefik.http.routers.sammelkarten.entrypoints=websecure"
-      - "traefik.http.routers.sammelkarten.tls.certresolver=letsencrypt"
-      - "traefik.http.services.sammelkarten.loadbalancer.server.port=5000"
+      caddy: sammelkarten.hackerwerkstatt.de
+      caddy.reverse_proxy: "{{upstreams 5000}}"
 
 networks:
-  traefik_proxy:
+  web:
     external: true
