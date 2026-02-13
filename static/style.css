@@ -1,0 +1,501 @@
+/* ═══════════════════════════════════════════════════════════
+   Sammelkarten Generator – Styles
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Reset & Base ──────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  /* Palette */
+  --bg-dark: #0f0f1a;
+  --bg-panel: rgba(255, 255, 255, 0.04);
+  --bg-panel-hover: rgba(255, 255, 255, 0.07);
+  --accent: #6c5ce7;
+  --accent-glow: #a29bfe;
+  --accent-secondary: #fd79a8;
+  --text: #e2e2f0;
+  --text-muted: #9b9bb5;
+  --card-bg: #fdf6e3;
+  --card-border: #d4a017;
+  --card-shadow: rgba(212, 160, 23, 0.35);
+  --danger: #ff6b6b;
+  --success: #00cec9;
+
+  /* Element colors */
+  --el-feuer: #ff6b35;
+  --el-wasser: #4fc3f7;
+  --el-pflanze: #66bb6a;
+  --el-elektro: #fdd835;
+  --el-eis: #80deea;
+  --el-kampf: #ef5350;
+  --el-gift: #ab47bc;
+  --el-psycho: #ec407a;
+  --el-drache: #5c6bc0;
+  --el-fee: #f48fb1;
+  --el-geist: #7e57c2;
+  --el-normal: #bdbdbd;
+
+  /* Typography */
+  --font-main: "Outfit", sans-serif;
+  --font-pixel: "Press Start 2P", monospace;
+
+  /* Spacing */
+  --radius: 14px;
+  --radius-sm: 8px;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-main);
+  background: var(--bg-dark);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.6;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(108, 92, 231, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(253, 121, 168, 0.06) 0%, transparent 60%);
+}
+
+/* ── App Wrapper ───────────────────────────────────────────── */
+.app-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* ── Hero ──────────────────────────────────────────────────── */
+.hero {
+  text-align: center;
+  padding: 3rem 1rem 2rem;
+}
+
+.hero__title {
+  font-family: var(--font-pixel);
+  font-size: clamp(1.1rem, 3vw, 1.8rem);
+  background: linear-gradient(135deg, var(--accent-glow), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.75rem;
+  letter-spacing: 1px;
+}
+
+.hero__subtitle {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+/* ── Main Grid ─────────────────────────────────────────────── */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Panels ────────────────────────────────────────────────── */
+.panel {
+  background: var(--bg-panel);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius);
+  padding: 2rem;
+  backdrop-filter: blur(12px);
+  transition: background 0.3s;
+}
+
+.panel:hover {
+  background: var(--bg-panel-hover);
+}
+
+.panel__title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--accent-glow);
+}
+
+/* ── Form ──────────────────────────────────────────────────── */
+.field {
+  margin-bottom: 1.25rem;
+}
+
+.field label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  font-family: var(--font-main);
+  font-size: 1rem;
+  transition: border-color 0.25s, box-shadow 0.25s;
+  outline: none;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.25);
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+.field select option {
+  background: #1e1e2e;
+  color: var(--text);
+}
+
+/* ── Generate Button ───────────────────────────────────────── */
+.btn-generate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0.9rem;
+  margin-top: 0.5rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-main);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+  box-shadow: 0 4px 20px rgba(108, 92, 231, 0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-generate:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 28px rgba(108, 92, 231, 0.5);
+}
+
+.btn-generate:active {
+  transform: translateY(0);
+}
+
+.btn-generate:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Spinner */
+.spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Card Stage ────────────────────────────────────────────── */
+.card-stage {
+  display: flex;
+  justify-content: center;
+  perspective: 900px;
+}
+
+/* ── Card Placeholder ──────────────────────────────────────── */
+.card-placeholder {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-muted);
+}
+
+.card-placeholder__icon {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 1rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ── Pokemon Card ──────────────────────────────────────────── */
+.pokemon-card {
+  width: 320px;
+  min-height: 460px;
+  background: var(--card-bg);
+  border: 6px solid var(--card-border);
+  border-radius: 16px;
+  padding: 1rem;
+  color: #333;
+  font-family: var(--font-main);
+  box-shadow:
+    0 8px 32px var(--card-shadow),
+    inset 0 0 60px rgba(255, 255, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+  animation: cardAppear 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.pokemon-card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.15) 45%,
+    rgba(255, 255, 255, 0.25) 50%,
+    rgba(255, 255, 255, 0.15) 55%,
+    transparent 60%
+  );
+  animation: holoShine 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes holoShine {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  100% { transform: translateX(100%) rotate(25deg); }
+}
+
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: rotateY(15deg) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: rotateY(0) scale(1);
+  }
+}
+
+/* Card Header */
+.card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.card__name {
+  font-weight: 900;
+  font-size: 1.25rem;
+  color: #1a1a2e;
+}
+
+.card__hp {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--el-feuer);
+}
+
+/* Element Badge */
+.card__element-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  font-size: 1.6rem;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Card Image */
+.card__image-frame {
+  width: 100%;
+  height: 180px;
+  border: 3px solid var(--card-border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #e8dacc 0%, #f5eee6 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+}
+
+.card__image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+
+.card__image-frame img.loaded {
+  display: block;
+}
+
+.card__image-placeholder {
+  text-align: center;
+  color: #aaa;
+}
+
+.card__image-placeholder span {
+  font-size: 2.5rem;
+  display: block;
+}
+
+.card__image-placeholder.hidden {
+  display: none;
+}
+
+/* Attacks */
+.card__attacks {
+  margin-bottom: 0.75rem;
+}
+
+.attack {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.attack:last-child {
+  border-bottom: none;
+}
+
+.attack__info {
+  flex: 1;
+}
+
+.attack__name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #1a1a2e;
+}
+
+.attack__desc {
+  font-size: 0.78rem;
+  color: #666;
+  margin-top: 2px;
+}
+
+.attack__damage {
+  font-weight: 900;
+  font-size: 1.3rem;
+  color: var(--el-feuer);
+  margin-left: 0.75rem;
+  min-width: 40px;
+  text-align: right;
+}
+
+/* Footer Info */
+.card__footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.4rem 0;
+  border-top: 2px solid rgba(0, 0, 0, 0.08);
+  margin-bottom: 0.4rem;
+}
+
+.card__footer .label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: #999;
+  display: block;
+}
+
+.card__weakness-info span:last-child,
+.card__retreat-info span:last-child {
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* Flavor Text */
+.card__flavor {
+  font-style: italic;
+  font-size: 0.75rem;
+  color: #777;
+  text-align: center;
+  padding-top: 0.3rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* ── Element-specific card borders ─────────────────────────── */
+.pokemon-card[data-element="Feuer"]   { border-color: var(--el-feuer); }
+.pokemon-card[data-element="Wasser"]  { border-color: var(--el-wasser); }
+.pokemon-card[data-element="Pflanze"] { border-color: var(--el-pflanze); }
+.pokemon-card[data-element="Elektro"] { border-color: var(--el-elektro); }
+.pokemon-card[data-element="Eis"]     { border-color: var(--el-eis); }
+.pokemon-card[data-element="Kampf"]   { border-color: var(--el-kampf); }
+.pokemon-card[data-element="Gift"]    { border-color: var(--el-gift); }
+.pokemon-card[data-element="Psycho"]  { border-color: var(--el-psycho); }
+.pokemon-card[data-element="Drache"]  { border-color: var(--el-drache); }
+.pokemon-card[data-element="Fee"]     { border-color: var(--el-fee); }
+.pokemon-card[data-element="Geist"]   { border-color: var(--el-geist); }
+.pokemon-card[data-element="Normal"]  { border-color: var(--el-normal); }
+
+/* ── Footer ────────────────────────────────────────────────── */
+.footer {
+  text-align: center;
+  padding: 2.5rem 1rem 1rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* ── Error toast ───────────────────────────────────────────── */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(120%);
+  background: var(--danger);
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  box-shadow: 0 4px 20px rgba(255, 107, 107, 0.4);
+  z-index: 1000;
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+}

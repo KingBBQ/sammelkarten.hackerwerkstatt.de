@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Erstelle deine eigene Sammelkarte im Pokémon-Stil mit KI-Power!" />
+  <title>Sammelkarten Generator – Hackerwerkstatt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-wrapper">
+    <!-- ─── Header ─────────────────────────────────────────────── -->
+    <header class="hero">
+      <h1 class="hero__title">⚡ Sammelkarten Generator</h1>
+      <p class="hero__subtitle">Erstelle deine eigene Sammelkarte im Pokémon-Stil – powered by KI!</p>
+    </header>
+
+    <!-- ─── Main Content ───────────────────────────────────────── -->
+    <main class="main-grid">
+      <!-- Form Panel -->
+      <section class="panel form-panel" id="form-panel">
+        <h2 class="panel__title">Deine Kreatur</h2>
+        <form id="card-form" autocomplete="off">
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="z.B. Flammorex" required />
+          </div>
+
+          <div class="field">
+            <label for="element">Element / Typ</label>
+            <select id="element" name="element">
+              <option value="Feuer">🔥 Feuer</option>
+              <option value="Wasser">💧 Wasser</option>
+              <option value="Pflanze">🌿 Pflanze</option>
+              <option value="Elektro">⚡ Elektro</option>
+              <option value="Eis">❄️ Eis</option>
+              <option value="Kampf">👊 Kampf</option>
+              <option value="Gift">☠️ Gift</option>
+              <option value="Psycho">🔮 Psycho</option>
+              <option value="Drache">🐉 Drache</option>
+              <option value="Fee">✨ Fee</option>
+              <option value="Geist">👻 Geist</option>
+              <option value="Normal">⬜ Normal</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="description">Beschreibung</label>
+            <textarea id="description" name="description" rows="3"
+              placeholder="Beschreibe deine Kreatur – Aussehen, Verhalten …"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="special_ability">Spezialfähigkeit</label>
+            <input type="text" id="special_ability" name="special_ability"
+              placeholder="z.B. Kann durch Wände gehen" />
+          </div>
+
+          <div class="field">
+            <label for="weakness">Schwäche</label>
+            <input type="text" id="weakness" name="weakness"
+              placeholder="z.B. Angst vor Katzen" />
+          </div>
+
+          <button type="submit" class="btn-generate" id="btn-generate">
+            <span class="btn-generate__text">🎴 Karte generieren</span>
+            <span class="btn-generate__loader" hidden>
+              <span class="spinner"></span> Wird generiert …
+            </span>
+          </button>
+        </form>
+      </section>
+
+      <!-- Card Preview Panel -->
+      <section class="panel preview-panel" id="preview-panel">
+        <h2 class="panel__title">Deine Karte</h2>
+        <div class="card-stage">
+          <!-- The generated card appears here -->
+          <div class="pokemon-card" id="pokemon-card" hidden>
+            <div class="card__header">
+              <span class="card__name" id="card-name"></span>
+              <span class="card__hp" id="card-hp"></span>
+            </div>
+            <div class="card__element-badge" id="card-element-badge"></div>
+            <div class="card__image-frame" id="card-image-frame">
+              <img id="card-image" alt="Kreatur-Bild" />
+              <div class="card__image-placeholder" id="card-image-placeholder">
+                <span>🎨</span>
+                <small>Bild wird geladen…</small>
+              </div>
+            </div>
+            <div class="card__attacks" id="card-attacks"></div>
+            <div class="card__footer">
+              <div class="card__weakness-info">
+                <span class="label">Schwäche</span>
+                <span id="card-weakness"></span>
+              </div>
+              <div class="card__retreat-info">
+                <span class="label">Rückzug</span>
+                <span id="card-retreat"></span>
+              </div>
+            </div>
+            <p class="card__flavor" id="card-flavor"></p>
+          </div>
+
+          <!-- Placeholder when no card yet -->
+          <div class="card-placeholder" id="card-placeholder">
+            <span class="card-placeholder__icon">🃏</span>
+            <p>Fülle das Formular aus und klicke auf <strong>Karte generieren</strong>!</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Made with ❤️ at <strong>Hackerwerkstatt</strong></p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
